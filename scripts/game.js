@@ -17,6 +17,13 @@ MicroModal.init({
 let currentQuestion = 0;
 
 planetButtons.forEach((planetButton) => {
+  // const planetImage = planetButton.querySelector("img");
+  // //get random number between 1 and 4
+  // const randomNum = Math.floor(Math.random() * 4) + 1;
+
+  // //change planet image
+  // planetImage.src = `img/planet${randomNum}.webp`;
+
   planetButton.addEventListener("click", (e) => {
     console.log(e.target);
     MicroModal.show("modal-1", {
