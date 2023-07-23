@@ -4,6 +4,8 @@ const modalTitle = document.querySelector("#modal-title");
 const modalQuestion = document.querySelector("#modal-question-title");
 const modalAnswers = [...document.querySelector("#modal-answers").children];
 let answerButtons;
+let score;
+let timer;
 
 console.log(modalQuestion);
 console.log(modalAnswers);
@@ -66,14 +68,12 @@ modalAnswers.forEach((modalAnswer) => {
     if (e.target.innerHTML === questions[currentQuestion].correctAnswer) {
       e.target.classList.add("correct");
       currentQuestion++;
-      // setTimeout(() => {
-      //   MicroModal.close("modal-1");
-      // }, 1000);
+      setTimeout(() => {
+        MicroModal.close("modal-1");
+        planetButtons[currentQuestion].scrollIntoView({ behavior: "smooth" });
+      }, 100);
     } else {
       e.target.classList.add("incorrect");
-      // setTimeout(() => {
-      //   MicroModal.close("modal-1");
-      // }, 1000);
     }
 
     if (currentQuestion === questions.length) {
