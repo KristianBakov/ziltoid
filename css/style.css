@@ -1,0 +1,287 @@
+:root {
+  --bg-color-main: #1d2537;
+  --bg-color-dark: #091b35;
+  --bg-color-modal: #171e2d;
+  --main-color: #87cc14;
+  --main-color-hover: #7bb317;
+  --answer-incorrect: #f00c0f;
+  --modal-button: #464e60;
+  --modal-button-hover: #303748;
+  --grey-color: #888d95;
+  --text-color-main: #212529;
+  --text-color-secondary: #676767;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Roboto", sans-serif;
+  font-size: 16px;
+  line-height: 1.5;
+  color: var(--text-color-main);
+  background-color: white;
+}
+
+a {
+  text-decoration: none;
+  color: var(--main-color);
+}
+
+a:hover {
+  color: var(--main-color-hover);
+}
+
+ul {
+  list-style: none;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+button {
+  cursor: pointer;
+  border: none;
+  outline: none;
+}
+
+.container {
+  max-width: 1240px;
+  margin: 0 auto;
+  padding: 0 15px;
+}
+
+main {
+  max-height: 100vh;
+}
+
+/* Path: css/header.css */
+
+.logo {
+  position: absolute;
+  top: 0;
+  right: 0;
+  margin: 20px;
+  width: 80px;
+  height: 80px;
+  /* hover tilt */
+  transform: rotate(0deg);
+  transition: transform 0.5s ease-in-out;
+}
+
+.logo:hover {
+  transform: rotate(-25deg);
+}
+
+#background,
+#stars {
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: -9999;
+}
+
+#background {
+  /* background: radial-gradient(
+    at bottom right,
+    #32577a 25%,
+    #05363b 55%,
+    #000000 90%
+  ); */
+  background: var(--bg-color-dark);
+}
+
+.planet-and-stars-image {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: bottom;
+  pointer-events: none;
+}
+
+.start-alien-image {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 200px;
+}
+
+.goal-image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 200px;
+}
+
+.game-wrapper {
+  height: 200vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+.timeline {
+  background-color: white;
+  width: 10px;
+  height: 95%;
+  z-index: -1;
+  border-radius: 10px;
+}
+
+.planets {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  flex-direction: column-reverse;
+}
+
+.planet-btn {
+  all: unset;
+  cursor: pointer;
+}
+
+.planet-btn img {
+  height: 100px;
+}
+
+/* Modal styles */
+
+/**************************\
+  Basic Modal Styles
+\**************************/
+
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-container {
+  background-color: var(--bg-color-modal);
+  color: white;
+  padding: 64px;
+  max-width: 824px;
+  max-height: 100vh;
+  border-radius: 12px;
+  overflow-y: auto;
+  position: relative;
+}
+
+.modal-close:before {
+  color: white;
+  content: "\2715";
+  font-size: 32px;
+}
+
+.modal-close {
+  position: absolute;
+  top: 24px;
+  right: 24px;
+  background: transparent;
+  border: 0;
+}
+
+#modal-title {
+  font-size: 24px;
+  font-weight: 400;
+  margin-bottom: 24px;
+}
+
+#modal-question-title {
+  font-size: 32px;
+  font-weight: 700;
+  margin-bottom: 24px;
+}
+
+#modal-answers {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-gap: 24px;
+}
+
+.modal-btn {
+  background-color: var(--modal-button);
+  color: white;
+  font-weight: 700;
+  border-radius: 8px;
+  padding: 24px;
+  font-size: 18px;
+
+  transition: -webkit-transform 0.25s ease-out;
+  transition: transform 0.25s ease-out;
+  transition: transform 0.25s ease-out, -webkit-transform 0.25s ease-out;
+}
+
+.modal-btn:focus,
+.modal-btn:hover {
+  background-color: var(--modal-button-hover);
+  outline: #888d95 1px solid;
+}
+
+.modal-btn.correct {
+  background-color: var(--main-color);
+  transform: scale(1.1);
+}
+
+.modal-btn.incorrect {
+  background-color: var(--answer-incorrect);
+}
+
+/**************************\
+       Animation Style
+\**************************/
+@keyframes mmfadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes mmslideIn {
+  from {
+    transform: translateY(15%);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+
+.micromodal-slide {
+  display: none;
+}
+
+.micromodal-slide.is-open {
+  display: block;
+}
+
+.micromodal-slide[aria-hidden="false"] .modal-overlay {
+  animation: mmfadeIn 0.3s cubic-bezier(0, 0, 0.2, 1);
+}
+
+.micromodal-slide[aria-hidden="false"] .modal-container {
+  animation: mmslideIn 0.3s cubic-bezier(0, 0, 0.2, 1);
+}

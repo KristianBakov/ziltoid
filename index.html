@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ziltoid</title>
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body>
+    <!-- Navbar -->
+    <div class="logo">
+      <a href="index.html"> <img src="img/logo.png" alt="Ziltoid logo" /> </a>
+    </div>
+
+    <!-- Main -->
+    <main>
+      <div id="background">
+        <!-- <canvas id="stars"></canvas> -->
+
+        <!-- background bottom image -->
+        <img
+          class="planet-and-stars-image"
+          src="img/bottom-planets.webp"
+          alt="Planets decoration"
+        />
+
+        <!-- the start image position bottom right -->
+        <img
+          src="img/alien-start.webp"
+          alt="alien at the beginning of the game"
+          class="start-alien-image"
+        />
+
+        <!-- the goal image positioned top left -->
+        <img
+          src="img/goal.webp"
+          alt="coffee and biscuit hugging with text 'goal'"
+          class="goal-image"
+        />
+      </div>
+
+      <div class="game-wrapper container">
+        <div class="timeline"></div>
+        <div class="planets">
+          <button class="planet-btn" aria-label="Question 1">
+            <img src="img/planet.webp" alt="planet 1" class="planet" />
+          </button>
+          <button class="planet-btn" aria-label="Question 2">
+            <img src="img/planet.webp" alt="planet 2" class="planet" />
+          </button>
+          <button class="planet-btn" aria-label="Question 3">
+            <img src="img/planet.webp" alt="planet 3" class="planet" />
+          </button>
+          <button class="planet-btn" aria-label="Question 4">
+            <img src="img/planet.webp" alt="planet 4" class="planet" />
+          </button>
+          <button class="planet-btn" aria-label="Question 5">
+            <img src="img/planet.webp" alt="planet 5" class="planet" />
+          </button>
+          <button class="planet-btn" aria-label="Question 6">
+            <img src="img/planet.webp" alt="planet 6" class="planet" />
+          </button>
+          <button class="planet-btn" aria-label="Question 7">
+            <img src="img/planet.webp" alt="planet 7" class="planet" />
+          </button>
+          <button class="planet-btn" aria-label="Question 8">
+            <img src="img/planet.webp" alt="planet 8" class="planet" />
+          </button>
+        </div>
+      </div>
+
+      <div class="modal micromodal-slide" id="modal-1" aria-hidden="true">
+        <div class="modal-overlay" tabindex="-1" data-micromodal-close>
+          <div
+            class="modal-container"
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="modal-1-title"
+          >
+            <header class="modal-header">
+              <h2 class="modal-title" id="modal-title">Question</h2>
+              <button
+                class="modal-close"
+                aria-label="Close modal"
+                data-micromodal-close
+              ></button>
+            </header>
+
+            <main class="modal-content" id="modal-1-content">
+              <h2 id="modal-question-title">Question</h2>
+              <div id="modal-answers">
+                <button class="modal-btn">Answer 1</button>
+                <button class="modal-btn">Answer 2</button>
+                <button class="modal-btn">Answer 3</button>
+                <button class="modal-btn">Answer 4</button>
+              </div>
+            </main>
+          </div>
+        </div>
+      </div>
+    </main>
+    <script src="https://unpkg.com/micromodal/dist/micromodal.min.js"></script>
+    <script src="scripts/game.js"></script>
+    <script src="scripts/background.js"></script>
+  </body>
+</html>
