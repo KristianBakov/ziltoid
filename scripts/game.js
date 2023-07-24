@@ -5,12 +5,7 @@ const modalQuestion = document.querySelector("#modal-question-title");
 const modalAnswers = [...document.querySelector("#modal-answers").children];
 const playButton = document.querySelector("#play-btn");
 const goalImage = document.querySelector("#goal-img");
-
 let currentQuestion = 0;
-let answerButtons;
-let score = 0;
-let timer;
-let lives;
 
 MicroModal.init({
   disableScroll: true,
@@ -81,7 +76,6 @@ function shuffleAnswers() {
 
 modalAnswers.forEach((modalAnswer) => {
   modalAnswer.addEventListener("click", (e) => {
-    // console.log(e.target + "clicked");
     if (e.target.innerHTML === questions[currentQuestion].correctAnswer) {
       e.target.classList.add("correct");
       setTimeout(() => {

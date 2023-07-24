@@ -302,6 +302,11 @@ main {
   background-color: var(--answer-incorrect);
 }
 
+#score-text {
+  font-size: 24px;
+  margin-bottom: 24px;
+}
+
 /* modal animations */
 
 @keyframes fadeIn {
