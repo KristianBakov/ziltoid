@@ -3,6 +3,7 @@ const planetButtons = [...document.querySelectorAll(".planet-btn")];
 const modalTitle = document.querySelector("#modal-title");
 const modalQuestion = document.querySelector("#modal-question-title");
 const modalAnswers = [...document.querySelector("#modal-answers").children];
+const playButton = document.querySelector("#play-btn");
 let answerButtons;
 let score;
 let timer;
@@ -16,16 +17,27 @@ MicroModal.init({
 });
 let currentQuestion = 0;
 
+//turn on popup when page loads
+window.addEventListener("load", () => {
+  MicroModal.show("modal-2", {
+    onClose: (modal) => playPressed(),
+    disableScroll: true,
+    disableFocus: true,
+  });
+});
+
 planetButtons.forEach((planetButton) => {
-  // const planetImage = planetButton.querySelector("img");
-  // //get random number between 1 and 4
-  // const randomNum = Math.floor(Math.random() * 4) + 1;
-
-  // //change planet image
-  // planetImage.src = `img/planet${randomNum}.webp`;
-
   planetButton.addEventListener("click", (e) => {
     console.log(e.target);
+    if (!e.target.classList.contains("current")) {
+      //shake image using javascript
+      e.target.classList.add("shake");
+      setTimeout(() => {
+        e.target.classList.remove("shake");
+      }, 500);
+      return;
+    }
+
     MicroModal.show("modal-1", {
       disableScroll: true,
       disableFocus: true,
@@ -74,10 +86,8 @@ modalAnswers.forEach((modalAnswer) => {
     console.log(e.target + "clicked");
     if (e.target.innerHTML === questions[currentQuestion].correctAnswer) {
       e.target.classList.add("correct");
-      currentQuestion++;
       setTimeout(() => {
-        MicroModal.close("modal-1");
-        planetButtons[currentQuestion].scrollIntoView({ behavior: "smooth" });
+        correctAnswerSelected();
       }, 100);
     } else {
       e.target.classList.add("incorrect");
@@ -88,6 +98,44 @@ modalAnswers.forEach((modalAnswer) => {
     }
   });
 });
+
+function correctAnswerSelected() {
+  MicroModal.close("modal-1");
+
+  if (currentQuestion === questions.length) {
+    console.log("game over");
+    //play animations
+    return;
+  }
+
+  currentQuestion++;
+  planetButtons[currentQuestion].scrollIntoView({
+    behavior: "smooth",
+    block: "center",
+    inline: "center",
+  });
+
+  //set last planed to completed
+  planetButtons[currentQuestion - 1].setAttribute("disabled", true);
+
+  //change current planet
+  planetButtons[currentQuestion - 1]
+    .querySelector("img")
+    .classList.remove("current");
+  planetButtons[currentQuestion].querySelector("img").classList.add("current");
+}
+
+function playPressed() {
+  //scroll to the bottom of the page
+  window.scrollTo({
+    top: document.body.scrollHeight,
+    behavior: "smooth",
+  });
+  //disable user scrolling
+  document.body.style.overflow = "hidden";
+
+  console.log("play pressed");
+}
 
 // Constants
 const questions = [

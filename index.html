@@ -28,20 +28,14 @@
           alt="alien at the beginning of the game"
           class="start-alien-image"
         />
-
-        <!-- the goal image positioned top left -->
-        <img
-          src="img/goal.webp"
-          alt="coffee and biscuit hugging with text 'goal'"
-          class="goal-image"
-        />
       </div>
 
       <div class="game-wrapper container">
         <div class="timeline"></div>
+
         <div class="planets">
-          <button class="planet-btn" aria-label="Question 1" disabled>
-            <img src="img/planet1.webp" alt="planet 1" class="planet" />
+          <button class="planet-btn" aria-label="Question 1">
+            <img src="img/planet1.webp" alt="planet 1" class="planet current" />
           </button>
           <button class="planet-btn" aria-label="Question 2">
             <img src="img/planet2.webp" alt="planet 2" class="planet" />
@@ -64,6 +58,11 @@
           <button class="planet-btn" aria-label="Question 8">
             <img src="img/planet4.webp" alt="planet 8" class="planet" />
           </button>
+          <img
+            src="img/goal.webp"
+            alt="coffee and biscuit hugging with text 'goal'"
+            class="goal-image"
+          />
         </div>
       </div>
 
@@ -92,6 +91,35 @@
                 <button class="modal-btn">Answer 3</button>
                 <button class="modal-btn">Answer 4</button>
               </div>
+            </main>
+          </div>
+        </div>
+      </div>
+
+      <!-- initial modal  -->
+      <div class="modal micromodal-slide" id="modal-2" aria-hidden="true">
+        <div class="modal-overlay" tabindex="-1" data-micromodal-close>
+          <div
+            class="modal-container"
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="modal-2-title"
+          >
+            <main class="modal-content" id="modal-2-content">
+              <h2 class="modal-title" id="modal-2-title">
+                Ziltoid the Omniscient Quiz Game
+              </h2>
+              <p>
+                Climb up the timeline planet by planet by answering Ziltoid
+                related questions!
+              </p>
+              <p>
+                Each correct answer will unlock a new planet with a new
+                question. Reach the coffee to win!
+              </p>
+              <button class="play-btn" id="play-btn" data-micromodal-close>
+                Play
+              </button>
             </main>
           </div>
         </div>
