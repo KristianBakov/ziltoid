@@ -4,12 +4,10 @@ const modalTitle = document.querySelector("#modal-title");
 const modalQuestion = document.querySelector("#modal-question-title");
 const modalAnswers = [...document.querySelector("#modal-answers").children];
 const playButton = document.querySelector("#play-btn");
+const goalImage = document.querySelector("#goal-img");
 let answerButtons;
 let score;
 let timer;
-
-console.log(modalQuestion);
-console.log(modalAnswers);
 
 MicroModal.init({
   disableScroll: true,
@@ -28,9 +26,8 @@ window.addEventListener("load", () => {
 
 planetButtons.forEach((planetButton) => {
   planetButton.addEventListener("click", (e) => {
-    console.log(e.target);
     if (!e.target.classList.contains("current")) {
-      //shake image using javascript
+      //shake image
       e.target.classList.add("shake");
       setTimeout(() => {
         e.target.classList.remove("shake");
@@ -54,7 +51,6 @@ function configureModal() {
   //set current question
   modalQuestion.innerHTML = questions[currentQuestion].question;
 
-  //set answers
   //clear answer buttons styles
   modalAnswers.forEach((modalAnswer) => {
     modalAnswer.classList.remove("correct");
@@ -83,7 +79,7 @@ function shuffleAnswers() {
 
 modalAnswers.forEach((modalAnswer) => {
   modalAnswer.addEventListener("click", (e) => {
-    console.log(e.target + "clicked");
+    // console.log(e.target + "clicked");
     if (e.target.innerHTML === questions[currentQuestion].correctAnswer) {
       e.target.classList.add("correct");
       setTimeout(() => {
@@ -92,19 +88,14 @@ modalAnswers.forEach((modalAnswer) => {
     } else {
       e.target.classList.add("incorrect");
     }
-
-    if (currentQuestion === questions.length) {
-      console.log("game over");
-    }
   });
 });
 
 function correctAnswerSelected() {
   MicroModal.close("modal-1");
 
-  if (currentQuestion === questions.length) {
-    console.log("game over");
-    //play animations
+  if (currentQuestion + 1 === questions.length) {
+    gameOver();
     return;
   }
 
@@ -135,6 +126,17 @@ function playPressed() {
   document.body.style.overflow = "hidden";
 
   console.log("play pressed");
+}
+
+function gameOver() {
+  //remove styles from last planet
+  planetButtons[currentQuestion]
+    .querySelector("img")
+    .classList.remove("current");
+  planetButtons[currentQuestion].setAttribute("disabled", true);
+
+  //scale up the goal image smoothly
+  goalImage.classList.add("scale-up-center");
 }
 
 // Constants
