@@ -5,17 +5,19 @@ const modalQuestion = document.querySelector("#modal-question-title");
 const modalAnswers = [...document.querySelector("#modal-answers").children];
 const playButton = document.querySelector("#play-btn");
 const goalImage = document.querySelector("#goal-img");
+
+let currentQuestion = 0;
 let answerButtons;
-let score;
+let score = 0;
 let timer;
+let lives;
 
 MicroModal.init({
   disableScroll: true,
   disableFocus: true,
 });
-let currentQuestion = 0;
 
-//turn on popup when page loads
+//show popup ob page load
 window.addEventListener("load", () => {
   MicroModal.show("modal-2", {
     onClose: (modal) => playPressed(),
@@ -26,29 +28,29 @@ window.addEventListener("load", () => {
 
 planetButtons.forEach((planetButton) => {
   planetButton.addEventListener("click", (e) => {
-    if (!e.target.classList.contains("current")) {
+    if (e.target.classList.contains("current")) {
+      //show QnA modal
+      MicroModal.show("modal-1", {
+        disableScroll: true,
+        disableFocus: true,
+      });
+      configureModal();
+    } else {
       //shake image
       e.target.classList.add("shake");
       setTimeout(() => {
         e.target.classList.remove("shake");
       }, 500);
-      return;
     }
-
-    MicroModal.show("modal-1", {
-      disableScroll: true,
-      disableFocus: true,
-    });
-    configureModal();
   });
 });
 
 function configureModal() {
-  //set modal title
+  //set modal title text
   modalTitle.innerHTML =
     "Question " + (currentQuestion + 1) + " of " + questions.length;
 
-  //set current question
+  //set current question text
   modalQuestion.innerHTML = questions[currentQuestion].question;
 
   //clear answer buttons styles
@@ -58,7 +60,8 @@ function configureModal() {
   });
 
   //shuffle answers
-  shuffleAnswers();
+  shuffleAnswers(modalAnswers);
+
   //set answers text
   for (let i = 0; i < modalAnswers.length; i++) {
     modalAnswers[i].innerHTML = questions[currentQuestion].answers[i];
@@ -66,8 +69,7 @@ function configureModal() {
 }
 
 function shuffleAnswers() {
-  //shuffle answers
-  // Start from the last element and swap it with a randomly selected element before it
+  //modalAnswers.sort(() => Math.random() - 0.5);
   for (let i = modalAnswers.length - 1; i > 0; i--) {
     const randomIndex = Math.floor(Math.random() * (i + 1));
     [modalAnswers[i], modalAnswers[randomIndex]] = [
