@@ -1,1 +1,1 @@
-# ziltoid
+# ziltoid the omniscient quiz game
