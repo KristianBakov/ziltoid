@@ -120,18 +120,16 @@ main {
   width: 200px;
 }
 
-@media screen and (max-width: 768px) {
-  .start-alien-image {
-    width: 120px;
-  }
-}
-
 .goal-image {
   width: 200px;
   margin-top: -42px;
 }
 
 @media screen and (max-width: 768px) {
+  .start-alien-image {
+    width: 120px;
+  }
+
   .goal-image {
     width: 120px;
   }
@@ -378,4 +376,14 @@ main {
   100% {
     transform: scale(1.5);
   }
+}
+
+#refresh-btn {
+  background-color: transparent;
+  color: inherit;
+  font-size: 16px;
+}
+
+#refresh-btn:hover {
+  text-decoration: underline;
 }

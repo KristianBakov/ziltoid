@@ -1,4 +1,4 @@
-//Get all the planets
+// Elements
 const planetButtons = [...document.querySelectorAll(".planet-btn")];
 const modalTitle = document.querySelector("#modal-title");
 const modalQuestion = document.querySelector("#modal-question-title");
@@ -13,10 +13,10 @@ MicroModal.init({
   disableFocus: true,
 });
 
-//show popup ob page load
+// Show popup on page load with game instructions
 window.addEventListener("load", () => {
   MicroModal.show("modal-2", {
-    onClose: (modal) => playPressed(),
+    onClose: () => playPressed(),
     disableScroll: true,
     disableFocus: true,
   });
@@ -25,14 +25,14 @@ window.addEventListener("load", () => {
 planetButtons.forEach((planetButton) => {
   planetButton.addEventListener("click", (e) => {
     if (e.target.classList.contains("current")) {
-      //show QnA modal
+      // If the planet has pending questions, show the modal to answer.
       MicroModal.show("modal-1", {
         disableScroll: true,
         disableFocus: true,
       });
       configureModal();
     } else {
-      //shake image
+      // Else shake the planet button to indicate it's not the current planet.
       e.target.classList.add("shake");
       setTimeout(() => {
         e.target.classList.remove("shake");
@@ -41,31 +41,32 @@ planetButtons.forEach((planetButton) => {
   });
 });
 
-function configureModal() {
-  //set modal title text
-  modalTitle.innerHTML =
-    "Question " + (currentQuestion + 1) + " of " + questions.length;
+const configureModal = () => {
+  // Set modal title text
+  modalTitle.innerHTML = `Question ${currentQuestion + 1} of ${
+    questions.length
+  }`;
 
-  //set current question text
+  // Set current question text
   modalQuestion.innerHTML = questions[currentQuestion].question;
 
-  //clear answer buttons styles
+  // Clear answer buttons styles
   modalAnswers.forEach((modalAnswer) => {
     modalAnswer.classList.remove("correct");
     modalAnswer.classList.remove("incorrect");
   });
 
-  //shuffle answers
+  // Shuffle answers
   shuffleAnswers(modalAnswers);
 
-  //set answers text
+  // Set answers text
   for (let i = 0; i < modalAnswers.length; i++) {
     modalAnswers[i].innerHTML = questions[currentQuestion].answers[i];
   }
-}
+};
 
-function shuffleAnswers() {
-  //modalAnswers.sort(() => Math.random() - 0.5);
+const shuffleAnswers = () => {
+  // modalAnswers.sort(() => Math.random() - 0.5);
   for (let i = modalAnswers.length - 1; i > 0; i--) {
     const randomIndex = Math.floor(Math.random() * (i + 1));
     [modalAnswers[i], modalAnswers[randomIndex]] = [
@@ -73,8 +74,9 @@ function shuffleAnswers() {
       modalAnswers[i],
     ];
   }
-}
+};
 
+// When an answer is selected, check if it's correct, if yes, scroll to the next planet.
 modalAnswers.forEach((modalAnswer) => {
   modalAnswer.addEventListener("click", (e) => {
     if (e.target.innerHTML === questions[currentQuestion].correctAnswer) {
@@ -88,7 +90,11 @@ modalAnswers.forEach((modalAnswer) => {
   });
 });
 
-function correctAnswerSelected() {
+/*
+ * When the correct answer is selected, scroll to the next planet.
+ * If it's the last planet, show the game over modal.
+ */
+const correctAnswerSelected = () => {
   MicroModal.close("modal-1");
 
   if (currentQuestion + 1 === questions.length) {
@@ -103,46 +109,40 @@ function correctAnswerSelected() {
     inline: "center",
   });
 
-  //set last planed to completed
   planetButtons[currentQuestion - 1].setAttribute("disabled", true);
 
-  //change current planet
   planetButtons[currentQuestion - 1]
     .querySelector("img")
     .classList.remove("current");
   planetButtons[currentQuestion].querySelector("img").classList.add("current");
-}
+};
 
-function playPressed() {
-  //scroll to the bottom of the page
+// Starts the game
+const playPressed = () => {
   window.scrollTo({
     top: document.body.scrollHeight,
     behavior: "smooth",
   });
-  //disable user scrolling
   document.body.style.overflow = "hidden";
+};
 
-  console.log("play pressed");
-}
-
-function gameOver() {
-  //remove styles from last planet
+const gameOver = () => {
   planetButtons[currentQuestion]
     .querySelector("img")
     .classList.remove("current");
+
   planetButtons[currentQuestion].setAttribute("disabled", true);
 
-  //scale up the goal image smoothly
   goalImage.classList.add("scale-up-center");
 
   MicroModal.show("modal-3", {
-    onClose: (modal) => {
+    onClose: () => {
       window.location.reload();
     },
     disableScroll: true,
     disableFocus: true,
   });
-}
+};
 
 refreshButton.addEventListener("click", () => {
   window.location.reload();
