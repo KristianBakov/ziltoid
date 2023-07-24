@@ -69,7 +69,6 @@ main {
   margin: 20px;
   width: 80px;
   height: 80px;
-  /* hover tilt */
   transform: rotate(0deg);
   transition: transform 0.5s ease-in-out;
 }
@@ -121,6 +120,12 @@ main {
   width: 200px;
 }
 
+@media screen and (max-width: 768px) {
+  .start-alien-image {
+    width: 120px;
+  }
+}
+
 .goal-image {
   width: 200px;
   margin-top: -42px;
@@ -148,11 +153,6 @@ main {
   z-index: -1;
   border-radius: 10px;
 }
-
-/* .planets-wrapper {
-  display: flex;
-  flex-direction: column;
-} */
 
 .planets {
   position: absolute;
@@ -185,11 +185,6 @@ main {
   transform: scale(1.3);
   transition: all 0.1s ease-in-out;
 }
-
-/* .planet:not(.current) {
-  filter: grayscale(50%);
-} */
-
 .planet.current:hover {
   transform: scale(1.5);
 }
@@ -197,8 +192,8 @@ main {
 .planet.shake {
   animation: shake 1s;
 }
-/* planet shake animation */
 
+/* planet shake animation */
 @keyframes shake {
   0%,
   100% {
@@ -231,6 +226,7 @@ main {
   display: flex;
   justify-content: center;
   align-items: center;
+  padding: 24px;
 }
 
 .modal-container {
@@ -361,10 +357,12 @@ main {
   background-color: var(--main-color-hover);
 }
 
-#modal-2-content {
+#modal-2-content,
+#modal-3-content {
   display: flex;
   flex-direction: column;
   justify-content: center;
+  align-items: center;
   gap: 24px;
   font-size: 24px;
 }

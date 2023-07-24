@@ -5,6 +5,7 @@ const modalQuestion = document.querySelector("#modal-question-title");
 const modalAnswers = [...document.querySelector("#modal-answers").children];
 const playButton = document.querySelector("#play-btn");
 const goalImage = document.querySelector("#goal-img");
+const refreshButton = document.querySelector("#refresh-btn");
 let currentQuestion = 0;
 
 MicroModal.init({
@@ -133,7 +134,19 @@ function gameOver() {
 
   //scale up the goal image smoothly
   goalImage.classList.add("scale-up-center");
+
+  MicroModal.show("modal-3", {
+    onClose: (modal) => {
+      window.location.reload();
+    },
+    disableScroll: true,
+    disableFocus: true,
+  });
 }
+
+refreshButton.addEventListener("click", () => {
+  window.location.reload();
+});
 
 // Constants
 const questions = [
